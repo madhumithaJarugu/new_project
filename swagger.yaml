@@ -1,0 +1,72 @@
+swagger: "2.0"
+info:
+  description: "This is a service where data from database can be stored or read from cache"
+  version: "1.0.0"
+  title: "Caching service"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "madhumithajarugu97@gmail.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+basePath: "/"
+tags:
+- name: "store"
+  description: "store data in cache from DB"
+- name: "read"
+  description: "read data from cache"
+schemes:
+- "http"
+paths:
+  /api/set:
+    post:
+      tags:
+      - "store"
+      summary: "store data into cache"
+      description: ""
+      operationId: "setToCache"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "data to be stored in in-memory/redis cache"
+        required: true
+        schema:
+          $ref: "/"
+      responses:
+        "405":
+          description: "Invalid input"
+        "200":
+          description: "successfull saved data to cache" 
+  /api/get/limit:
+    get:
+      tags:
+      - "read"
+      summary: "read data from in-memory/redis cache"
+      description: "data will be stored in cache with a key element.data fram cache can be fetched with the key"
+      operationId: "getFromCache"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "status"
+        in: "query"
+        description: "Status values that need to be considered for filter"
+        required: true
+        type: "array"
+        items:
+          type: "string"
+          enum:
+          - "cache hit"
+          - "cache miss"
+      responses:
+        "200":
+          description: "successful operation"
+        "400":
+          description: "Invalid status value"
+     
+  
+  
+    
