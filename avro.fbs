@@ -1,0 +1,6 @@
+namespace messageInterface;
+
+table message {
+   message: string;
+}
+root_type message;
